@@ -1,0 +1,14 @@
+{
+    "name": "gameboy-online",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "test": "jest ."
+    },
+    "devDependencies": {
+        "jest": "^26.0.1",
+        "jest-image-snapshot": "^4.0.0",
+        "puppeteer": "^3.0.4"
+    }
+}
