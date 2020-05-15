@@ -71,29 +71,27 @@ async function runROM(rom, wait) {
 // Tests
 //
 
-const SEC = 1000;
-
-jest.setTimeout(3 * 60 * SEC);
+jest.setTimeout(180 * 1000);
 
 describe("Test roms", () => {
   test("cpu_instrs", async () => {
-    const image = await runROM("roms/cpu_instrs/cpu_instrs.gb", 60 * SEC);
+    const image = await runROM("roms/cpu_instrs/cpu_instrs.gb", 30000);
     expect(image).toMatchImageSnapshot();
   });
   test("instr_timing", async () => {
-    const image = await runROM("roms/instr_timing/instr_timing.gb", 30000);
+    const image = await runROM("roms/instr_timing/instr_timing.gb", 3000);
     expect(image).toMatchImageSnapshot();
   });
   test("mem_timing", async () => {
-    const image = await runROM("roms/mem_timing/mem_timing.gb", 30000);
+    const image = await runROM("roms/mem_timing/mem_timing.gb", 6000);
     expect(image).toMatchImageSnapshot();
   });
   test("mem_timing-2", async () => {
-    const image = await runROM("roms/mem_timing-2/mem_timing.gb", 30000);
+    const image = await runROM("roms/mem_timing-2/mem_timing.gb", 6000);
     expect(image).toMatchImageSnapshot();
   });
   test("interrupt_time", async () => {
-    const image = await runROM("roms/interrupt_time/interrupt_time.gb", 30000);
+    const image = await runROM("roms/interrupt_time/interrupt_time.gb", 6000);
     expect(image).toMatchImageSnapshot();
   });
 });
