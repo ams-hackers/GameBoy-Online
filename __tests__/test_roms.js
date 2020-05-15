@@ -5,14 +5,15 @@ const puppeteer = require("puppeteer");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 expect.extend({ toMatchImageSnapshot });
 
-// Static server
+//
+// Static web server
+//
 const express = require("express");
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, "..")));
 
 let server;
-
 beforeAll((done) => {
   server = app.listen(3000, () => done());
 });
@@ -21,40 +22,78 @@ afterAll((done) => {
   server.close(() => done());
 });
 
+//
+// Browser integration
+//
 let browser;
+let page;
+
+beforeAll(async () => {
+  browser = await puppeteer.launch({
+    headless:
+      process.env.HEADLESS === "true" || process.env.HEADLESS === undefined,
+  });
+});
+
+afterAll(async () => {
+  await browser.close();
+});
+
+beforeEach(async () => {
+  page = await browser.newPage();
+  await page.goto("http://localhost:3000/index.xhtml");
+});
+
+afterEach(async () => {
+  page = undefined;
+});
+
+//
+// Running ROMs
+//
+async function runROM(rom, wait) {
+  const page = await browser.newPage();
+  await page.goto("http://localhost:3000/index.xhtml");
+
+  const data = fs.readFileSync(path.resolve(__dirname, rom));
+  const datauri = new Buffer(data).toString("base64");
+
+  await page.evaluate((datauri) => {
+    initPlayer();
+    start(mainCanvas, base64_decode(datauri));
+  }, datauri);
+
+  await page.waitFor(wait);
+  return await page.screenshot();
+}
+
+//
+// Tests
+//
+
+const SEC = 1000;
+
+jest.setTimeout(3 * 60 * SEC);
 
 describe("Test roms", () => {
-  beforeEach(async () => {
-    try {
-      browser = await puppeteer.launch({
-        headless:
-          process.env.HEADLESS === "true" || process.env.HEADLESS === undefined,
-      });
-    } catch (ex) {
-      console.log("exception");
-    }
+  test("cpu_instrs", async () => {
+    const image = await runROM("roms/cpu_instrs/cpu_instrs.gb", 60 * SEC);
+    expect(image).toMatchImageSnapshot();
   });
-
-  afterEach(async () => {
-    await browser.close();
+  test("instr_timing", async () => {
+    const image = await runROM("roms/instr_timing/instr_timing.gb", 30000);
+    expect(image).toMatchImageSnapshot();
   });
-
-  test("complies with the test", async () => {
-    jest.setTimeout(60000);
-    const page = await browser.newPage();
-    await page.goto("http://localhost:3000/index.xhtml");
-
-    const data = fs.readFileSync(__dirname + "/../roms/10-print.gb");
-    const datauri = new Buffer(data).toString("base64");
-
-    await page.evaluate((datauri) => {
-      initPlayer();
-      start(mainCanvas, base64_decode(datauri));
-    }, datauri);
-
-    await page.waitFor(30000);
-
-    const image = await page.screenshot({ path: "example.png" });
+  test("mem_timing", async () => {
+    const image = await runROM("roms/mem_timing/mem_timing.gb", 30000);
+    expect(image).toMatchImageSnapshot();
+  });
+  test("mem_timing-2", async () => {
+    const image = await runROM("roms/mem_timing-2/mem_timing.gb", 30000);
+    expect(image).toMatchImageSnapshot();
+  });
+  test("interrupt_time", async () => {
+    const image = await runROM("roms/interrupt_time/interrupt_time.gb", 30000);
     expect(image).toMatchImageSnapshot();
   });
 });
