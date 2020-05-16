@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -15,7 +16,8 @@ html, body {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 45px;
-  box-shadow: inset -15px 16px 6px -12px rgba(255,255,255, 0.5), inset 15px -11px 6px -11px rgba(0,0,0,0.5);
+  box-shadow: inset -15px 16px 6px -12px rgba(255, 255, 255, 0.5),
+    inset 15px -11px 6px -11px rgba(0, 0, 0, 0.5);
 }
 
 #on_off {
@@ -25,7 +27,7 @@ html, body {
 }
 
 #screen_cover {
-  background-color: #525E59;
+  background-color: #525e59;
   width: 80%;
   height: 40%;
   margin: 0 auto;
@@ -61,7 +63,7 @@ html, body {
   border-radius: 10px;
 }
 
-#power_light +div {
+#power_light + div {
   float: right;
 }
 
@@ -81,7 +83,7 @@ html, body {
 }
 
 #pocket {
-  color: #525E59;
+  color: #525e59;
   background-color: white;
   font-size: 8pt;
 }
@@ -105,11 +107,12 @@ html, body {
 }
 
 #d_pad > div {
-  background-color: #525E59;
+  background-color: #525e59;
 }
 
 #d_pad_up {
-  box-shadow: inset -15px 10px 10px -12px rgba(255,255,255, 0.5), inset 15px -11px 6px -11px rgba(0,0,0,0.5);
+  box-shadow: inset -15px 10px 10px -12px rgba(255, 255, 255, 0.5),
+    inset 15px -11px 6px -11px rgba(0, 0, 0, 0.5);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   width: 33%;
@@ -118,14 +121,16 @@ html, body {
 }
 
 #d_pad_left_right {
-  box-shadow: inset -15px 10px 10px -12px rgba(255,255,255, 0.5), inset 15px -11px 6px -11px rgba(0,0,0,0.5);
+  box-shadow: inset -15px 10px 10px -12px rgba(255, 255, 255, 0.5),
+    inset 15px -11px 6px -11px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   height: 33%;
   margin: 0 auto;
 }
 
 #d_pad_down {
-  box-shadow: inset -15px 10px 10px -12px rgba(255,255,255, 0.5), inset 15px -11px 6px -11px rgba(0,0,0,0.5);
+  box-shadow: inset -15px 10px 10px -12px rgba(255, 255, 255, 0.5),
+    inset 15px -11px 6px -11px rgba(0, 0, 0, 0.5);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   width: 33%;
@@ -146,7 +151,8 @@ html, body {
   margin: 0 auto;
   border-radius: 20px;
   /*box-shadow: inset 5px -5px 6px 0px rgba(255,255,255, 0.5);*/
-  box-shadow: inset -15px 10px 10px -12px rgba(0,0,0, 0.5), inset 15px -11px 6px -11px rgba(255,255,255,0.5);
+  box-shadow: inset -15px 10px 10px -12px rgba(0, 0, 0, 0.5),
+    inset 15px -11px 6px -11px rgba(255, 255, 255, 0.5);
 }
 
 #d_pad_right {
@@ -155,7 +161,10 @@ html, body {
   float: right;
 }
 
-#arrow_up, #arrow_down, #arrow_left, #arrow_right {
+#arrow_up,
+#arrow_down,
+#arrow_left,
+#arrow_right {
   width: 0;
   height: 0;
   margin: 0 auto;
@@ -201,22 +210,23 @@ html, body {
 
 #start_button_group {
   right: 33%;
-  top: 85%
+  top: 85%;
 }
 
 .button_group {
   position: absolute;
   text-align: center;
-  color: #525E59;
+  color: #525e59;
   font-size: 10pt;
 }
 
 .button_group div {
   width: 40px;
-  background-color: #525E59;
+  background-color: #525e59;
   border-radius: 20px;
   margin: 0 auto 10px auto;
-  box-shadow: inset -15px 10px 10px -12px rgba(255,255,255, 0.5), inset 15px -11px 6px -11px rgba(0,0,0,0.5);
+  box-shadow: inset -15px 10px 10px -12px rgba(255, 255, 255, 0.5),
+    inset 15px -11px 6px -11px rgba(0, 0, 0, 0.5);
 }
 
 .button_group .round_button {
